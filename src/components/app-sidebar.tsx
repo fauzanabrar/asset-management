@@ -109,23 +109,23 @@ export function AppSidebar({ user }: { user?: any }) {
                     Nexus Admin
                 </span>
             </SidebarHeader>
-            <SidebarContent className="px-2 py-4 gap-6">
+            <SidebarContent className="px-4 py-6 gap-8">
                 {items.map((group, index) => (
                     <SidebarGroup key={index} className="px-0">
-                        <SidebarGroupLabel className="px-4 text-xs font-semibold text-muted-foreground/70 uppercase tracking-widest mb-2">
+                        <SidebarGroupLabel className="px-4 text-xs font-semibold text-muted-foreground/70 uppercase tracking-widest mb-4">
                             {group.title}
                         </SidebarGroupLabel>
                         <SidebarGroupContent>
-                            <SidebarMenu>
+                            <SidebarMenu className="gap-2">
                                 {group.items.map((item: any) => (
                                     <SidebarMenuItem key={item.title}>
                                         {item.items ? (
-                                            <div className="mt-2 mb-4 space-y-1">
-                                                <div className="px-2 py-1.5 flex items-center gap-2 text-sm font-bold text-foreground/70 uppercase tracking-tight">
+                                            <div className="space-y-2">
+                                                <div className="px-3 py-2 flex items-center gap-3 text-sm font-bold text-foreground/70 uppercase tracking-tight">
                                                     {item.icon && <item.icon className="h-4 w-4" />}
                                                     <span>{item.title}</span>
                                                 </div>
-                                                <SidebarMenuSub className="space-y-1 pl-2 border-l-0 px-0 mx-0 mt-0">
+                                                <SidebarMenuSub className="space-y-1 pl-4 border-l-0 px-0 mx-0 mt-0">
                                                     {item.items.map((subItem: any) => (
                                                         <SidebarMenuSubItem key={subItem.title}>
                                                             <SidebarMenuSubButton
@@ -148,7 +148,7 @@ export function AppSidebar({ user }: { user?: any }) {
                                                 isActive={pathname === item.url}
                                                 tooltip={item.title}
                                                 size="lg"
-                                                className="h-12 text-base font-medium border border-transparent shadow-none hover:shadow-sm hover:border-sidebar-border hover:bg-sidebar-accent transition-all my-1"
+                                                className="h-12 text-base font-medium border border-transparent shadow-none hover:shadow-sm hover:border-sidebar-border hover:bg-sidebar-accent transition-all"
                                             >
                                                 <Link href={item.url}>
                                                     {item.icon && <item.icon className="h-5 w-5" />}
