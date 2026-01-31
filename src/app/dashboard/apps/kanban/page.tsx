@@ -100,6 +100,11 @@ export default function KanbanPage() {
         e.dataTransfer.dropEffect = "move";
     }
 
+    const handleDragEnd = () => {
+        setDraggedTaskId(null);
+        setDraggedFromColId(null);
+    }
+
     const handleDrop = (e: React.DragEvent, toColId: string) => {
         e.preventDefault();
         const taskId = e.dataTransfer.getData("taskId");
@@ -124,6 +129,8 @@ export default function KanbanPage() {
         });
 
         toast.success(`Task moved to ${toColId === 'inprogress' ? 'In Progress' : toColId === 'todo' ? 'To Do' : 'Review'}`);
+        setDraggedTaskId(null);
+        setDraggedFromColId(null);
     }
 
     const handleAddTask = () => {
@@ -197,6 +204,7 @@ export default function KanbanPage() {
                                         key={task.id}
                                         draggable
                                         onDragStart={(e) => handleDragStart(e, task.id, column.id)}
+                                        onDragEnd={handleDragEnd}
                                         className="transition-transform active:scale-95 touch-none"
                                     >
                                         <Card className={cn(
