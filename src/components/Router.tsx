@@ -15,7 +15,7 @@ const rules = [
 
 export function Router() {
     return (
-        <Card className="h-full flex flex-col border-none shadow-sm bg-white/50 dark:bg-card/50 backdrop-blur-sm">
+        <Card className="h-full flex flex-col border shadow-sm bg-white/50 dark:bg-card/50 backdrop-blur-sm">
             <CardHeader className="pb-2 flex flex-row items-center justify-between">
                 <div>
                     <CardTitle className="text-lg">Routing Rules</CardTitle>
