@@ -14,7 +14,7 @@ interface FileWithProgress {
     status: "uploading" | "completed" | "error"
 }
 
-export function FileUploader({ className }: { className?: string }) {
+export function FileUploader({ className, multiple = true }: { className?: string, multiple?: boolean }) {
     const [files, setFiles] = React.useState<FileWithProgress[]>([])
     const [isDragging, setIsDragging] = React.useState(false)
 
@@ -22,7 +22,7 @@ export function FileUploader({ className }: { className?: string }) {
         e.preventDefault()
         setIsDragging(false)
         const droppedFiles = Array.from(e.dataTransfer.files)
-        handleUpload(droppedFiles)
+        handleUpload(multiple ? droppedFiles : [droppedFiles[0]])
     }
 
     const handleUpload = (newFiles: File[]) => {
@@ -33,7 +33,11 @@ export function FileUploader({ className }: { className?: string }) {
             status: "uploading"
         }))
 
-        setFiles(prev => [...prev, ...mappedFiles])
+        if (multiple) {
+            setFiles(prev => [...prev, ...mappedFiles])
+        } else {
+            setFiles(mappedFiles)
+        }
 
         // Simulate upload progress
         mappedFiles.forEach(file => {
@@ -76,13 +80,13 @@ export function FileUploader({ className }: { className?: string }) {
                     <Upload className="h-8 w-8" />
                 </div>
                 <div className="text-center space-y-1">
-                    <p className="font-bold text-lg dark:text-zinc-100">Click or drag to upload</p>
+                    <p className="font-bold text-lg dark:text-zinc-100">Click or drag {multiple ? 'files' : 'a file'} to upload</p>
                     <p className="text-sm text-muted-foreground dark:text-zinc-400">Support for PNG, JPG, PDF, and CSV (Max 10MB)</p>
                 </div>
                 <input
                     type="file"
                     className="absolute inset-0 opacity-0 cursor-pointer"
-                    multiple
+                    multiple={multiple}
                     onChange={(e) => e.target.files && handleUpload(Array.from(e.target.files))}
                 />
             </div>
