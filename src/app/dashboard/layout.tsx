@@ -11,7 +11,6 @@ import {
 } from "@/components/ui/breadcrumb"
 import { auth } from "@/auth"
 import { UserNav } from "@/components/user-nav"
-import { Toaster } from "@/components/ui/sonner"
 
 export default async function DashboardLayout({ children }: { children: React.ReactNode }) {
     const session = await auth()
@@ -45,7 +44,6 @@ export default async function DashboardLayout({ children }: { children: React.Re
                     {children}
                 </div>
             </main>
-            <Toaster />
         </SidebarProvider>
     )
 }

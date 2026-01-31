@@ -1,13 +1,10 @@
 "use client"
 
 import { Separator } from "@/components/ui/separator"
-import { ModeToggle } from "@/components/mode-toggle"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Label } from "@/components/ui/label"
-import { Input } from "@/components/ui/input"
-import { Switch } from "@/components/ui/switch"
-import { Button } from "@/components/ui/button"
+import { AppearanceSettings } from "./appearance-settings"
+import { AccountSettings } from "./account-settings"
+import { NotificationSettings } from "./notification-settings"
 
 export default function SettingsPage() {
     return (
@@ -27,89 +24,16 @@ export default function SettingsPage() {
                     <TabsTrigger value="notifications">Notifications</TabsTrigger>
                 </TabsList>
 
-                <TabsContent value="appearance" className="space-y-4">
-                    <Card>
-                        <CardHeader>
-                            <CardTitle>Theme Preferences</CardTitle>
-                            <CardDescription>
-                                Customize the look and feel of the application.
-                            </CardDescription>
-                        </CardHeader>
-                        <CardContent className="space-y-4">
-                            <div className="flex items-center justify-between">
-                                <div className="space-y-1">
-                                    <Label>Theme Mode</Label>
-                                    <p className="text-sm text-muted-foreground">
-                                        Select your preferred theme.
-                                    </p>
-                                </div>
-                                <ModeToggle />
-                            </div>
-                            <Separator />
-                            <div className="flex items-center justify-between">
-                                <div className="space-y-1">
-                                    <Label>Reduced Motion</Label>
-                                    <p className="text-sm text-muted-foreground">
-                                        Reduce animations for accessibility.
-                                    </p>
-                                </div>
-                                <Switch id="reduced-motion" />
-                            </div>
-                        </CardContent>
-                    </Card>
+                <TabsContent value="appearance">
+                    <AppearanceSettings />
                 </TabsContent>
 
-                <TabsContent value="account" className="space-y-4">
-                    <Card>
-                        <CardHeader>
-                            <CardTitle>Profile</CardTitle>
-                            <CardDescription>
-                                Update your personal information.
-                            </CardDescription>
-                        </CardHeader>
-                        <CardContent className="space-y-4">
-                            <div className="grid gap-2">
-                                <Label htmlFor="name">Display Name</Label>
-                                <Input id="name" defaultValue="Admin User" />
-                            </div>
-                            <div className="grid gap-2">
-                                <Label htmlFor="email">Email</Label>
-                                <Input id="email" defaultValue="admin@example.com" disabled />
-                            </div>
-                            <Button>Save Changes</Button>
-                        </CardContent>
-                    </Card>
+                <TabsContent value="account">
+                    <AccountSettings />
                 </TabsContent>
 
-                <TabsContent value="notifications" className="space-y-4">
-                    <Card>
-                        <CardHeader>
-                            <CardTitle>Notifications</CardTitle>
-                            <CardDescription>
-                                Configure how you check alerts.
-                            </CardDescription>
-                        </CardHeader>
-                        <CardContent className="space-y-4">
-                            <div className="flex items-center justify-between">
-                                <div className="space-y-1">
-                                    <Label>Email Alerts</Label>
-                                    <p className="text-sm text-muted-foreground">
-                                        Receive daily summaries via email.
-                                    </p>
-                                </div>
-                                <Switch defaultChecked />
-                            </div>
-                            <div className="flex items-center justify-between">
-                                <div className="space-y-1">
-                                    <Label>Push Notifications</Label>
-                                    <p className="text-sm text-muted-foreground">
-                                        Receive real-time alerts in browser.
-                                    </p>
-                                </div>
-                                <Switch />
-                            </div>
-                        </CardContent>
-                    </Card>
+                <TabsContent value="notifications">
+                    <NotificationSettings />
                 </TabsContent>
             </Tabs>
         </div>

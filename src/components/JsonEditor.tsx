@@ -3,7 +3,6 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/u
 interface JsonEditorProps {
     open: boolean;
     onOpenChange: (open: boolean) => void;
-    showToast: (message: string, type: 'success' | 'error' | 'warning') => void;
 }
 
 export function JsonEditor({ open, onOpenChange }: JsonEditorProps) {

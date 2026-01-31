@@ -1,47 +1,39 @@
 import NextAuth from 'next-auth';
 import Credentials from 'next-auth/providers/credentials';
 import { authConfig } from './auth.config';
-import { db } from './db';
-import { users } from './db/schema';
-import { eq, or } from 'drizzle-orm';
 import { compare } from 'bcryptjs';
-import { z } from 'zod';
+import { loginSchema } from './lib/validations';
+import { UserService } from './lib/user-service';
 
 export const { auth, signIn, signOut } = NextAuth({
     ...authConfig,
     providers: [
         Credentials({
             async authorize(credentials) {
-                // Schema now allows any string for "email" field (which is our identifier)
-                const parsedCredentials = z
-                    .object({ email: z.string().min(1), password: z.string().min(6) })
-                    .safeParse(credentials);
+                const validatedFields = loginSchema.safeParse(credentials);
 
-                if (parsedCredentials.success) {
-                    const { email, password } = parsedCredentials.data;
+                if (!validatedFields.success) return null;
 
-                    const [user] = await db
-                        .select()
-                        .from(users)
-                        .where(or(eq(users.username, email), eq(users.email, email)));
+                const { email, password } = validatedFields.data;
 
-                    if (!user) {
-                        console.log('User not found:', email);
-                        return null;
-                    }
+                try {
+                    // Use UserService to find the user
+                    const user = await UserService.findByIdentifier(email);
+
+                    if (!user) return null;
 
                     const passwordsMatch = await compare(password, user.password);
-                    if (passwordsMatch) return {
-                        id: user.id,
-                        name: user.name,
-                        email: user.email,
-                    };
-
-                    console.log('Password mismatch for:', email);
-                    return null;
+                    if (passwordsMatch) {
+                        return {
+                            id: user.id,
+                            name: user.name,
+                            email: user.email,
+                        };
+                    }
+                } catch (error) {
+                    console.error("[AUTH_AUTHORIZE_ERROR]:", error);
                 }
 
-                console.log('Invalid credentials validation:', parsedCredentials.error);
                 return null;
             },
         }),

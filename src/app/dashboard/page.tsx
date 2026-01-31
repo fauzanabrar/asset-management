@@ -9,7 +9,6 @@ import { Transformers } from "@/components/Transformers";
 import { SettingsDialog } from "@/components/SettingsDialog";
 import { JsonEditor } from "@/components/JsonEditor";
 import { LogViewer } from "@/components/LogViewer";
-import { Toaster } from "@/components/ui/sonner";
 import { toast } from "sonner";
 import {
   Tooltip,
@@ -56,14 +55,11 @@ export default function Dashboard() {
         <JsonEditor
           open={isJsonEditorOpen}
           onOpenChange={setIsJsonEditorOpen}
-          showToast={(msg, type) => toast[type === 'error' ? 'error' : 'success'](msg)}
         />
         <LogViewer
           open={isLogViewerOpen}
           onOpenChange={setIsLogViewerOpen}
-          showToast={(msg, type) => toast[type === 'error' ? 'error' : 'success'](msg)}
         />
-        <Toaster />
       </div>
     </TooltipProvider>
   );
