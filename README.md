@@ -1,36 +1,96 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# CCR Admin Dashboard
 
-## Getting Started
+A premium, high-fidelity Next.js dashboard template designed for AI-driven applications and modern SaaS platforms. Built with a focus on aesthetics, developer experience, and scalability.
 
-First, run the development server:
+![Project Preview](https://github.com/user-attachments/assets/placeholder)
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+## ✨ Features
+
+### 🤖 AI Management Suite
+- **Model Providers**: centralized configuration for Anthropic, OpenAI, Google Gemini, and Groq.
+- **Routing Engine**: Intelligent request dispatching using Regex and Keyword patterns.
+- **Transformers**: UI for managing data transformation logic.
+- **Live Logs**: Real-time monitoring of AI interactions and system performance.
+
+### 📋 Workflow & Productivity
+- **Advanced Kanban**: high-performance drag-and-drop board for task management with detailed task views and asset uploading.
+- **Unified Messaging**: Professional-grade Chat and Email interfaces.
+- **Calendar**: Full-featured scheduling system with event management.
+
+### 📊 Business Intelligence
+- **Real-time Analytics**: interactive dashboards tracking engagement, bounce rates, and user sessions.
+- **Key Statistics**: Financial overview and demographic analysis with premium gradient styling.
+- **CRM Lite**: Customer and Sales management tables powered by `@tanstack/react-table`.
+
+### 🛠️ Developer Infrastructure
+- **Component Library**: A massive gallery of UI primitives (Dialogs, Sliders, Date Pickers, Selects) in a consistent design system.
+- **Database Studio**: Integrated viewer for schema migrations and table management (via Drizzle Kit).
+- **Glassmorphism Design**: A custom system leveraging Tailwind 4, backdrop filters, and sleek dark mode support.
+
+## 🚀 Tech Stack
+
+- **Framework**: [Next.js 15](https://nextjs.org/) (App Router)
+- **Runtime**: [React 19](https://react.dev/)
+- **Language**: TypeScript
+- **Styling**: [Tailwind CSS 4](https://tailwindcss.com/)
+- **Authentication**: [NextAuth.js v5](https://authjs.dev/)
+- **Database**: [Drizzle ORM](https://orm.drizzle.team/) with [PostgreSQL](https://www.postgresql.org/)
+- **Components**: [Radix UI](https://www.radix-ui.com/) + [Lucide Icons](https://lucide.dev/)
+- **State/Data**: [Sonner](https://sonner.emilkowal.ski/) (Toasts)
+
+## 🛠️ Getting Started
+
+### 1. Prerequisites
+- Node.js 18+ 
+- PNPM (recommended) or NPM
+- A PostgreSQL database instance
+
+### 2. Environment Setup
+Create a `.env.local` file in the root:
+
+```env
+# Database
+DATABASE_URL="your_postgres_connection_string"
+
+# Authentication
+AUTH_SECRET="your_auth_secret" # Generate with: npx auth secret
+
+# Optional: AI Provider Keys
+OPENAI_API_KEY=""
+ANTHROPIC_API_KEY=""
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### 3. Installation & Database
+```bash
+# Install dependencies
+pnpm install
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+# Push schema to database
+pnpm drizzle-kit push
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### 4. Run Development Server
+```bash
+pnpm dev
+```
 
-## Learn More
+Open [http://localhost:3000](http://localhost:3000) to see the application.
 
-To learn more about Next.js, take a look at the following resources:
+## 📂 Project Structure
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- `src/app`: Next.js App Router pages and layouts.
+- `src/components`: Reusable UI components and feature-specific modules.
+- `src/hooks`: Custom React hooks for file uploads, auth, etc.
+- `src/lib`: Shared utilities, actions, and navigation configuration.
+- `src/db`: Database schema definitions and Drizzle client.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## 🎨 Design Philosophy
 
-## Deploy on Vercel
+This template prioritizes a **"Visual First"** approach. Every component is crafted to look premium out of the box, using:
+- **Tonal Elevate**: Strategic use of shadows and borders for depth.
+- **Dynamic Interactions**: Hover states and micro-animations for better UX.
+- **Adaptive Layout**: Fully responsive from mobile sidebars to complex desktop grids.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+---
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Built with ❤️ by your AI collaborator.

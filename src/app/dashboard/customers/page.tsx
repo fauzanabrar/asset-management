@@ -78,16 +78,16 @@ export default function CustomersPage() {
 
     return (
         <div className="space-y-6">
-            <div className="flex items-center justify-between">
-                <div>
+            <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+                <div className="text-start">
                     <h2 className="text-3xl font-bold tracking-tight">Customer Management</h2>
                     <p className="text-muted-foreground">View and manage your client database and their activity.</p>
                 </div>
-                <div className="flex items-center gap-2">
-                    <Button variant="outline" className="gap-2" onClick={() => toast.success("Customer list exported to CSV")}>
+                <div className="flex items-center gap-2 w-full sm:w-auto">
+                    <Button variant="outline" className="gap-2 flex-1 sm:flex-none" onClick={() => toast.success("Customer list exported to CSV")}>
                         <Download className="h-4 w-4" /> Export
                     </Button>
-                    <Button className="gap-2" onClick={() => setIsAddDialogOpen(true)}>
+                    <Button className="gap-2 flex-1 sm:flex-none" onClick={() => setIsAddDialogOpen(true)}>
                         <UserPlus className="h-4 w-4" /> Add Customer
                     </Button>
                 </div>

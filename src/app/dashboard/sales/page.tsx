@@ -18,16 +18,16 @@ const sales = [
 export default function SalesPage() {
     return (
         <div className="space-y-6">
-            <div className="flex items-center justify-between">
-                <div>
+            <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+                <div className="text-start">
                     <h2 className="text-3xl font-bold tracking-tight">Sales Overview</h2>
                     <p className="text-muted-foreground">Track your transactions and billing history in real-time.</p>
                 </div>
-                <div className="flex items-center gap-2">
-                    <Button variant="outline" className="gap-2" onClick={() => window.print()}>
+                <div className="flex items-center gap-2 w-full sm:w-auto">
+                    <Button variant="outline" className="gap-2 flex-1 sm:flex-none" onClick={() => window.print()}>
                         <Printer className="h-4 w-4" /> Print
                     </Button>
-                    <Button className="gap-2 shadow-lg" onClick={() => toast.success("Sales report shared successfully")}>
+                    <Button className="gap-2 shadow-lg flex-1 sm:flex-none" onClick={() => toast.success("Sales report shared successfully")}>
                         <Share2 className="h-4 w-4" /> Share Report
                     </Button>
                 </div>
