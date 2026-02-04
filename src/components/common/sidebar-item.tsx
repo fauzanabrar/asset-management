@@ -2,7 +2,13 @@
 
 import Link from "next/link"
 import { usePathname } from "next/navigation"
-import { SidebarMenuButton, SidebarMenuItem, SidebarMenuSub, SidebarMenuSubButton, SidebarMenuSubItem } from "@/components/ui/sidebar"
+import {
+    SidebarMenuButton,
+    SidebarMenuItem,
+    SidebarMenuSub,
+    SidebarMenuSubButton,
+    SidebarMenuSubItem,
+} from "@/components/ui/sidebar"
 import { SidebarItem as SidebarItemType } from "@/lib/navigation"
 
 interface SidebarItemProps {
@@ -12,9 +18,11 @@ interface SidebarItemProps {
 export function SidebarItem({ item }: SidebarItemProps) {
     const pathname = usePathname()
 
-    // Check if pathname starts with the item URL for nested pages
-    const isParentActive = item.url && pathname.startsWith(item.url)
-    const isExactMatch = pathname === item.url
+    const isActive = (url?: string) => {
+        if (!url) return false
+        if (url === "/") return pathname === url
+        return pathname === url || pathname.startsWith(`${url}/`)
+    }
 
     if (item.items) {
         return (
@@ -29,7 +37,7 @@ export function SidebarItem({ item }: SidebarItemProps) {
                             <SidebarMenuSubItem key={subItem.title}>
                                 <SidebarMenuSubButton
                                     asChild
-                                    isActive={pathname === subItem.url}
+                                    isActive={isActive(subItem.url)}
                                     size="md"
                                     className="h-10 text-base font-medium border border-transparent hover:bg-sidebar-accent hover:border-sidebar-border hover:shadow-sm transition-all"
                                 >
@@ -49,7 +57,7 @@ export function SidebarItem({ item }: SidebarItemProps) {
         <SidebarMenuItem>
             <SidebarMenuButton
                 asChild
-                isActive={isExactMatch}
+                isActive={isActive(item.url)}
                 tooltip={item.title}
                 size="lg"
                 className="h-12 text-base font-medium border border-transparent shadow-none hover:shadow-sm hover:border-sidebar-border hover:bg-sidebar-accent transition-all"

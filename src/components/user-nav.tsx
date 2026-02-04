@@ -12,6 +12,7 @@ import { Button } from "@/components/ui/button"
 import { Avatar, AvatarFallback } from "@/components/ui/avatar"
 import { logout } from "@/lib/actions"
 import { LogOut, User, Settings, ChevronDown } from "lucide-react"
+import { useTransition } from "react"
 
 interface UserNavProps {
     user: {
@@ -21,12 +22,15 @@ interface UserNavProps {
 }
 
 export function UserNav({ user }: UserNavProps) {
+    const [isPending, startTransition] = useTransition()
+
     return (
         <DropdownMenu>
             <DropdownMenuTrigger asChild>
                 <Button
                     variant="ghost"
                     className="flex items-center gap-3 px-3 py-2 h-auto rounded-lg hover:bg-muted transition-colors border border-transparent hover:border-border"
+                    disabled={isPending}
                 >
                     <Avatar className="h-9 w-9 border-2 border-primary/20">
                         <AvatarFallback className="bg-gradient-to-tr from-blue-500 to-purple-600 text-white font-bold text-base">
@@ -62,12 +66,15 @@ export function UserNav({ user }: UserNavProps) {
                 <DropdownMenuSeparator />
                 <DropdownMenuItem
                     className="text-red-600 focus:text-red-600 focus:bg-red-50 dark:focus:bg-red-950/20 cursor-pointer"
-                    onClick={async () => {
-                        await logout()
+                    disabled={isPending}
+                    onClick={() => {
+                        startTransition(async () => {
+                            await logout()
+                        })
                     }}
                 >
                     <LogOut className="mr-2 h-4 w-4" />
-                    <span>Sign out</span>
+                    <span>{isPending ? "Signing out..." : "Sign out"}</span>
                 </DropdownMenuItem>
             </DropdownMenuContent>
         </DropdownMenu>

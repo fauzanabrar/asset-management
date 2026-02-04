@@ -1,6 +1,5 @@
 "use client"
 
-import { Separator } from "@/components/ui/separator"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { AppearanceSettings } from "./appearance-settings"
 import { AccountSettings } from "./account-settings"
@@ -8,14 +7,11 @@ import { NotificationSettings } from "./notification-settings"
 
 export default function SettingsPage() {
     return (
-        <div className="space-y-6">
-            <div>
-                <h3 className="text-lg font-medium">Settings</h3>
-                <p className="text-sm text-muted-foreground">
-                    Manage your application preferences and account settings.
-                </p>
+        <div className="space-y-10">
+            <div className="space-y-2">
+                <h1 className="text-3xl font-bold tracking-tight">Settings</h1>
+                <p className="text-muted-foreground">Manage your application preferences and account settings.</p>
             </div>
-            <Separator />
 
             <Tabs defaultValue="appearance" className="space-y-4">
                 <TabsList>

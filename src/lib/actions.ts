@@ -37,6 +37,8 @@ export async function register(formData: FormData) {
     }
 }
 
+import { redirect } from "next/navigation"
+
 /**
  * Handles user authentication via credentials.
  */
@@ -49,7 +51,11 @@ export async function authenticate(formData: FormData) {
     }
 
     try {
-        await signIn("credentials", formData);
+        // We set redirect: false to handle it manually and avoid NEXT_REDIRECT errors in try-catch
+        const result = await signIn("credentials", { ...rawData, redirect: false });
+        if (result?.error) {
+            return { error: "Invalid username/email or password." };
+        }
     } catch (error) {
         if (error instanceof AuthError) {
             switch (error.type) {
@@ -59,17 +65,18 @@ export async function authenticate(formData: FormData) {
                     return { error: "An unexpected error occurred during sign in." };
             }
         }
+        // If it's a redirect error from Auth.js, we let it propagate if we didn't use redirect: false
         throw error;
     }
+
+    // Manual redirect after successful sign in
+    redirect("/dashboard");
 }
 
 /**
  * Signs the user out of their session.
  */
 export async function logout() {
-    try {
-        await signOut();
-    } catch (error) {
-        console.error("[LOGOUT_ERROR]:", error);
-    }
+    await signOut({ redirect: false });
+    redirect("/login");
 }

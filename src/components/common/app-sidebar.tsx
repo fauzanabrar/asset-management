@@ -15,7 +15,7 @@ import {
 } from "@/components/ui/sidebar"
 import { logout } from "@/lib/actions"
 import { sidebarGroups } from "@/lib/navigation"
-import { SidebarItem } from "./sidebar_item"
+import { SidebarItem } from "@/components/sidebar_item"
 import { useTransition } from "react"
 
 interface AppSidebarProps {

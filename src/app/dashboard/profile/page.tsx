@@ -10,16 +10,13 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 
 export default function ProfilePage() {
     return (
-        <div className="space-y-6">
-            <div>
-                <h3 className="text-lg font-medium">Profile</h3>
-                <p className="text-sm text-muted-foreground">
-                    This is how others will see you on the site.
-                </p>
+        <div className="space-y-10">
+            <div className="space-y-2">
+                <h1 className="text-3xl font-bold tracking-tight">Profile</h1>
+                <p className="text-muted-foreground">This is how others will see you on the site.</p>
             </div>
-            <Separator />
 
-            <div className="flex flex-col md:flex-row gap-6">
+            <div className="flex flex-col lg:flex-row gap-8">
                 {/* Left Column: User Info */}
                 <div className="flex-1 space-y-6">
                     <Card>
@@ -46,7 +43,7 @@ export default function ProfilePage() {
                 </div>
 
                 {/* Right Column: Avatar & Account */}
-                <div className="w-full md:w-1/3 space-y-6">
+                <div className="w-full lg:w-80 space-y-6">
                     <Card>
                         <CardHeader>
                             <CardTitle>Avatar</CardTitle>

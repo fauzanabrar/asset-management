@@ -19,7 +19,7 @@ import { Label } from "@/components/ui/label"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { ScrollArea } from "@/components/ui/scroll-area"
-import { FileUploader } from "@/components/file-uploader"
+import { FileUploader } from "@/components/common/file-uploader"
 import { cn } from "@/lib/utils"
 
 import { TaskCard, type Task } from "./components/task-card"

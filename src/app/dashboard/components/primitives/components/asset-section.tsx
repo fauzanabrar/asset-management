@@ -1,6 +1,6 @@
 "use client"
 
-import { FileUploader } from "@/components/file-uploader"
+import { FileUploader } from "@/components/common/file-uploader"
 import { FileField } from "@/components/ui/file-field"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 

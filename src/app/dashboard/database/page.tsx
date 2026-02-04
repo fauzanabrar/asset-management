@@ -145,9 +145,14 @@ const data: User[] = [
 
 export default function DatabasePage() {
     return (
-        <div className="container mx-auto py-10">
-            <h3 className="text-2xl font-bold tracking-tight mb-4">Database Records</h3>
-            <DataTable columns={columns} data={data} />
+        <div className="space-y-10">
+            <div className="space-y-2">
+                <h1 className="text-3xl font-bold tracking-tight">Database</h1>
+                <p className="text-muted-foreground">Browse and manage all tables in your database.</p>
+            </div>
+            <div className="container mx-auto py-0">
+                <DataTable columns={columns} data={data} />
+            </div>
         </div>
     )
 }

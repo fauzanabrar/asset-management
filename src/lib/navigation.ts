@@ -20,7 +20,7 @@ export interface SidebarGroup {
 
 export const sidebarGroups: SidebarGroup[] = [
     {
-        title: "Overview",
+        title: "Main",
         type: "group",
         items: [
             {
@@ -28,20 +28,42 @@ export const sidebarGroups: SidebarGroup[] = [
                 url: "/dashboard",
                 icon: Home,
             },
+        ]
+    },
+    {
+        title: "Analytics & Insights",
+        type: "group",
+        items: [
             {
                 title: "Analytics",
                 url: "/dashboard/analytics",
-                icon: LayoutDashboard,
+                icon: BarChart3,
             },
             {
                 title: "Statistics",
                 url: "/dashboard/statistics",
-                icon: BarChart3,
+                icon: LayoutDashboard,
             },
         ]
     },
     {
-        title: "Applications",
+        title: "Content & Operations",
+        type: "group",
+        items: [
+            {
+                title: "Customers",
+                url: "/dashboard/customers",
+                icon: Users,
+            },
+            {
+                title: "Sales",
+                url: "/dashboard/sales",
+                icon: ShoppingCart,
+            },
+        ]
+    },
+    {
+        title: "Workspace Apps",
         type: "group",
         items: [
             {
@@ -67,23 +89,7 @@ export const sidebarGroups: SidebarGroup[] = [
         ]
     },
     {
-        title: "Management",
-        type: "group",
-        items: [
-            {
-                title: "Customers",
-                url: "/dashboard/customers",
-                icon: Users,
-            },
-            {
-                title: "Sales",
-                url: "/dashboard/sales",
-                icon: ShoppingCart,
-            },
-        ]
-    },
-    {
-        title: "Developer",
+        title: "Development",
         type: "group",
         items: [
             {
@@ -97,11 +103,8 @@ export const sidebarGroups: SidebarGroup[] = [
             },
             {
                 title: "Components",
+                url: "/dashboard/components",
                 icon: Box,
-                items: [
-                    { title: "Library", url: "/dashboard/components" },
-                    { title: "Primitives", url: "/dashboard/components/primitives" },
-                ]
             },
             {
                 title: "API Keys",
@@ -111,18 +114,18 @@ export const sidebarGroups: SidebarGroup[] = [
         ]
     },
     {
-        title: "Settings",
+        title: "Account",
         type: "group",
         items: [
-            {
-                title: "General",
-                url: "/dashboard/settings",
-                icon: Settings,
-            },
             {
                 title: "Profile",
                 url: "/dashboard/profile",
                 icon: User,
+            },
+            {
+                title: "Settings",
+                url: "/dashboard/settings",
+                icon: Settings,
             },
             {
                 title: "Documentation",

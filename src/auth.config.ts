@@ -5,21 +5,26 @@ export const authConfig = {
         signIn: '/login',
         newUser: '/register',
     },
+    session: {
+        strategy: 'jwt',
+    },
     callbacks: {
         authorized({ auth, request: { nextUrl } }) {
             const isLoggedIn = !!auth?.user;
             const isOnDashboard = nextUrl.pathname.startsWith('/dashboard');
+            const isOnAuthPage = nextUrl.pathname === '/login' || nextUrl.pathname === '/register';
+
             if (isOnDashboard) {
                 if (isLoggedIn) return true;
                 return false; // Redirect unauthenticated users to login page
-            } else if (isLoggedIn) {
-                // Redirect logged-in users away from login/register pages
-                if (nextUrl.pathname === '/login' || nextUrl.pathname === '/register') {
-                    return Response.redirect(new URL('/dashboard', nextUrl));
-                }
             }
+
+            if (isOnAuthPage && isLoggedIn) {
+                return Response.redirect(new URL('/dashboard', nextUrl));
+            }
+
             return true;
         },
     },
-    providers: [], // Add providers with an empty array for now
+    providers: [],
 } satisfies NextAuthConfig;
