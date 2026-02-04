@@ -2,7 +2,7 @@
 
 import Link from "next/link"
 import { usePathname } from "next/navigation"
-import { SidebarMenuButton, SidebarMenuItem, SidebarMenuSub, SidebarMenuSubButton, SidebarMenuSubItem } from "@/components/ui/sidebar"
+import { SidebarMenuButton, SidebarMenuItem, SidebarMenuSub, SidebarMenuSubButton, SidebarMenuSubItem, useSidebar } from "@/components/ui/sidebar"
 import { SidebarItem as SidebarItemType } from "@/lib/navigation"
 
 interface SidebarItemProps {
@@ -11,6 +11,13 @@ interface SidebarItemProps {
 
 export function SidebarItem({ item }: SidebarItemProps) {
     const pathname = usePathname()
+    const { isMobile, setOpenMobile } = useSidebar()
+
+    const handleNavClick = () => {
+        if (isMobile) {
+            setOpenMobile(false)
+        }
+    }
 
     // Check if pathname starts with the item URL for nested pages
     const isParentActive = item.url && pathname.startsWith(item.url)
@@ -33,7 +40,7 @@ export function SidebarItem({ item }: SidebarItemProps) {
                                     size="md"
                                     className="h-10 text-base font-medium border border-transparent hover:bg-sidebar-accent hover:border-sidebar-border hover:shadow-sm transition-all"
                                 >
-                                    <Link href={subItem.url}>
+                                    <Link href={subItem.url} onClick={handleNavClick}>
                                         <span>{subItem.title}</span>
                                     </Link>
                                 </SidebarMenuSubButton>
@@ -54,7 +61,7 @@ export function SidebarItem({ item }: SidebarItemProps) {
                 size="lg"
                 className="h-12 text-base font-medium border border-transparent shadow-none hover:shadow-sm hover:border-sidebar-border hover:bg-sidebar-accent transition-all"
             >
-                <Link href={item.url || "#"}>
+                <Link href={item.url || "#"} onClick={handleNavClick}>
                     {item.icon && <item.icon className="h-5 w-5" />}
                     <span>{item.title}</span>
                 </Link>
