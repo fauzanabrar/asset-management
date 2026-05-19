@@ -218,11 +218,7 @@ export default async function PRDetailPage({ params }: { params: Promise<{ id: s
         <div className="flex-1 space-y-6 p-8 pt-6 max-w-5xl mx-auto">
             <BreadcrumbSetter title={pr.title} />
             <div className="flex items-center justify-between space-y-2">
-                <div>
-                    <h2 className="text-3xl font-bold tracking-tight">{pr.title}</h2>
-                    <p className="text-muted-foreground mt-2">Diajukan oleh {requester?.name || requester?.username} {requester?.location ? ` (${requester.location})` : ''} pada {new Date(pr.createdAt).toLocaleDateString('id-ID', { year: 'numeric', month: 'long', day: 'numeric' })}</p>
-                </div>
-                <PRStatusBadge status={pr.status} />
+                <h2 className="text-3xl font-bold tracking-tight">{pr.title}</h2>
             </div>
             <ScrollToActive activeIndex={activeIndex} />
 
@@ -233,7 +229,6 @@ export default async function PRDetailPage({ params }: { params: Promise<{ id: s
                             <CardHeader className="py-3 px-4 bg-muted/20 border-b">
                                 <div className="flex items-center justify-between">
                                     <div className="flex items-center gap-2">
-                                        <ReceiptText className="h-4 w-4 text-primary" />
                                         <CardTitle className="text-sm font-bold text-foreground">Rencana Anggaran Biaya (RAB)</CardTitle>
                                     </div>
                                     <div className="flex items-center gap-3">
@@ -298,12 +293,7 @@ export default async function PRDetailPage({ params }: { params: Promise<{ id: s
 
                     <Card className="shadow-lg border-muted/30 overflow-hidden">
                         <CardHeader className="py-3 px-6 pb-0">
-                            <div className="flex items-center gap-3">
-                                <div className="p-1.5 rounded-lg bg-orange-500/10 text-orange-500">
-                                    <History className="h-4 w-4" />
-                                </div>
-                                <CardTitle className="text-lg font-black tracking-tight text-foreground">Alur Pengadaan</CardTitle>
-                            </div>
+                            <CardTitle className="text-lg font-black tracking-tight text-foreground">Alur Pengadaan</CardTitle>
                         </CardHeader>
                         <CardContent className="pt-2 px-6 pb-2">
                             <div className="pl-2">

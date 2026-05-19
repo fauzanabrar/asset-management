@@ -7,8 +7,7 @@ import { redirect } from 'next/navigation'
 // Mocking dependencies
 vi.mock('./user-service', () => ({
     UserService: {
-        isUsernameTaken: vi.fn(),
-        isEmailTaken: vi.fn(),
+        isIdentifierTaken: vi.fn(),
         createUser: vi.fn(),
     },
 }))
@@ -36,9 +35,7 @@ describe('Auth Actions', () => {
             formData.append('email', 'test@example.com')
 
             // @ts-ignore
-            UserService.isUsernameTaken.mockResolvedValue(false)
-            // @ts-ignore
-            UserService.isEmailTaken.mockResolvedValue(false)
+            UserService.isIdentifierTaken.mockResolvedValue({ username: false, email: false })
             // @ts-ignore
             UserService.createUser.mockResolvedValue({ id: '1', name: 'Test User' })
 
@@ -54,10 +51,10 @@ describe('Auth Actions', () => {
             formData.append('password', 'password123')
 
             // @ts-ignore
-            UserService.isUsernameTaken.mockResolvedValue(true)
+            UserService.isIdentifierTaken.mockResolvedValue({ username: true, email: false })
 
             const result = await register(formData)
-            expect(result.error).toContain('taken')
+            expect(result.error).toContain('digunakan')
         })
     })
 

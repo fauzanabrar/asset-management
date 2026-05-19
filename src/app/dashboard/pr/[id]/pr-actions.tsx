@@ -50,23 +50,23 @@ interface PRActionButtonsProps {
     category?: 'RAB' | 'GENERAL';
 }
 
-export function PRActionButtons({ 
-    prId, status, userRole, isOwner, 
+export function PRActionButtons({
+    prId, status, userRole, isOwner,
     initialRabItems, initialRabUrl, initialRabNotes,
     variant = 'default',
     category = 'GENERAL'
 }: PRActionButtonsProps) {
     const [isLoading, setIsLoading] = useState(false);
-    
+
     // Upload state for dialogs
     const [uploadMode, setUploadMode] = useState<"file" | "url">("file");
     const [selectedFile, setSelectedFile] = useState<File | null>(null);
     const [enteredUrl, setEnteredUrl] = useState(initialRabUrl || "");
     const [keterangan, setKeterangan] = useState(initialRabNotes || "");
-    
+
     // RAB Items state
     const [rabItems, setRabItems] = useState<RABItem[]>(
-        initialRabItems && initialRabItems.length > 0 
+        initialRabItems && initialRabItems.length > 0
             ? initialRabItems.map(item => ({
                 name: item.name,
                 category: item.category,
@@ -75,7 +75,7 @@ export function PRActionButtons({
             }))
             : [{ name: '', category: 'Elektronik', quantity: 1, price: '' }]
     );
-    
+
     // Dialog states
     const [showUploadGambar, setShowUploadGambar] = useState(false);
     const [showCreateRAB, setShowCreateRAB] = useState(false);
@@ -128,12 +128,12 @@ export function PRActionButtons({
 
         if (role === 'GA_STAFF') {
             if (status === 'PENDING_GAMBAR') actions.push({ label: 'Upload Gambar', onClick: () => setShowUploadGambar(true), type: 'OTHER' });
-            
+
             // RAB editing is available in both RAB creation and Manager Approval stages for STAFF only
             if (status === 'PENDING_RAB' || status === 'PENDING_GA_MANAGER') {
                 const hasRab = initialRabUrl || (initialRabItems && initialRabItems.length > 0);
-                actions.push({ 
-                    label: hasRab ? 'Edit RAB' : 'Buat RAB', 
+                actions.push({
+                    label: hasRab ? 'Edit RAB' : 'Buat RAB',
                     type: 'RAB',
                     onClick: () => {
                         // Ensure state matches current RAB if editing
@@ -151,10 +151,10 @@ export function PRActionButtons({
                             }
                         }
                         setShowCreateRAB(true);
-                    } 
+                    }
                 });
             }
-            
+
             if (status === 'PENDING_VERIFIKASI') actions.push({ label: 'Verifikasi Spesifikasi', onClick: () => setShowVerifikasi(true), type: 'OTHER' });
             if (status === 'PENDING_PENGADAAN') actions.push({ label: 'Selesaikan Pengadaan', onClick: () => setShowComplete(true), type: 'OTHER' });
         }
@@ -175,12 +175,12 @@ export function PRActionButtons({
             if (!['PENDING_GAMBAR', 'PENDING_RAB', 'PENDING_GA_MANAGER'].includes(status)) {
                 actions.push({ label: 'Minta Revisi', onClick: () => setShowRevision(true), variant: 'outline', type: 'OTHER' });
             }
-            
+
             // Tolak is NOT available for Gambar or RAB stages
             // Also, during GA Manager Approval and PR Upload stages, only the GA_MANAGER can reject
             const isRestrictedStage = ['PENDING_GA_MANAGER', 'PENDING_CABANG_PR'].includes(status);
             const canTolak = !['PENDING_GAMBAR', 'PENDING_RAB'].includes(status) && (!isRestrictedStage || role === 'GA_MANAGER');
-            
+
             if (canTolak) {
                 actions.push({ label: 'Tolak', onClick: () => setShowReject(true), variant: 'destructive', type: 'OTHER' });
             }
@@ -194,35 +194,35 @@ export function PRActionButtons({
         return actions;
     };
 
-        const actions = getAvailableActions();
-        
-        // Filter based on category if requested
-        let filteredActions = actions;
-        if (category === 'RAB') {
-            filteredActions = actions.filter(a => a.type === 'RAB');
-        } else if (variant === 'minimal') {
-            // In minimal general mode, just show the first action
-            filteredActions = actions.slice(0, 1);
-        }
-        
-        if (filteredActions.length === 0) return null;
+    const actions = getAvailableActions();
 
-        return (
-            <>
-                <div className="flex gap-2 flex-wrap">
-                    {filteredActions.map((action, index) => (
-                        <Button
-                            key={index}
-                            variant={variant === 'minimal' ? 'secondary' : (action.variant || 'default')}
-                            size={variant === 'minimal' ? 'sm' : 'default'}
-                            className={variant === 'minimal' ? 'h-7 px-3 text-[11px] font-bold shadow-sm border' : ''}
-                            onClick={action.onClick}
-                            disabled={isLoading}
-                        >
-                            {action.label}
-                        </Button>
-                    ))}
-                </div>
+    // Filter based on category if requested
+    let filteredActions = actions;
+    if (category === 'RAB') {
+        filteredActions = actions.filter(a => a.type === 'RAB');
+    } else if (variant === 'minimal') {
+        // In minimal general mode, just show the first action
+        filteredActions = actions.slice(0, 1);
+    }
+
+    if (filteredActions.length === 0) return null;
+
+    return (
+        <>
+            <div className="flex gap-2 flex-wrap">
+                {filteredActions.map((action, index) => (
+                    <Button
+                        key={index}
+                        variant={variant === 'minimal' ? 'secondary' : (action.variant || 'default')}
+                        size={variant === 'minimal' ? 'sm' : 'default'}
+                        className={variant === 'minimal' ? 'h-7 px-3 text-[11px] font-bold shadow-sm border' : ''}
+                        onClick={action.onClick}
+                        disabled={isLoading}
+                    >
+                        {action.label}
+                    </Button>
+                ))}
+            </div>
 
             {/* Stage 2: Upload Gambar */}
             <Dialog open={showUploadGambar} onOpenChange={setShowUploadGambar}>
@@ -231,10 +231,10 @@ export function PRActionButtons({
                         <DialogTitle>Upload Gambar & Desain</DialogTitle>
                         <DialogDescription>Lampirkan gambar atau desain perencanaan untuk pengadaan ini.</DialogDescription>
                     </DialogHeader>
-                    
+
                     <div className="flex-1 overflow-y-auto px-6 py-4">
                         <div className="grid gap-4">
-                            <UniversalUploader 
+                            <UniversalUploader
                                 currentMode={uploadMode} onModeChange={setUploadMode}
                                 onFileSelected={setSelectedFile} onUrlEntered={setEnteredUrl}
                                 accept="image/*,.pdf,application/pdf"
@@ -264,20 +264,20 @@ export function PRActionButtons({
                         <DialogTitle>Rencana Anggaran Biaya (RAB)</DialogTitle>
                         <DialogDescription>Detailkan item pengadaan dan lampirkan dokumen RAB.</DialogDescription>
                     </DialogHeader>
-                    
+
                     <div className="flex-1 overflow-y-auto px-6 py-4">
                         <div className="grid gap-6">
                             <RABItemEditor items={rabItems} onChange={setRabItems} />
-                            
+
                             <div className="space-y-3 pt-4 border-t">
                                 <Label className="font-bold">Dokumen RAB (Excel/PDF)</Label>
-                                <UniversalUploader 
+                                <UniversalUploader
                                     currentMode={uploadMode} onModeChange={setUploadMode}
                                     onFileSelected={setSelectedFile} onUrlEntered={setEnteredUrl}
                                     accept=".pdf,.xlsx,.xls,application/pdf,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/vnd.ms-excel"
                                 />
                             </div>
-                            
+
                             <div className="grid gap-2">
                                 <Label className="font-bold">Keterangan RAB</Label>
                                 <Textarea placeholder="Catatan tambahan..." value={keterangan} onChange={(e) => setKeterangan(e.target.value)} rows={2} />
@@ -304,10 +304,10 @@ export function PRActionButtons({
                         <DialogTitle>Approval GA Manager</DialogTitle>
                         <DialogDescription>Berikan persetujuan untuk RAB yang telah dibuat.</DialogDescription>
                     </DialogHeader>
-                    
+
                     <div className="flex-1 overflow-y-auto px-6 py-4">
                         <div className="grid gap-4">
-                            <UniversalUploader 
+                            <UniversalUploader
                                 currentMode={uploadMode} onModeChange={setUploadMode}
                                 onFileSelected={setSelectedFile} onUrlEntered={setEnteredUrl}
                             />
@@ -335,10 +335,10 @@ export function PRActionButtons({
                         <DialogTitle>Upload PR Approved</DialogTitle>
                         <DialogDescription>Lampirkan dokumen Purchase Request (PR) yang sudah ditandatangani.</DialogDescription>
                     </DialogHeader>
-                    
+
                     <div className="flex-1 overflow-y-auto px-6 py-4">
                         <div className="grid gap-4">
-                            <UniversalUploader 
+                            <UniversalUploader
                                 currentMode={uploadMode} onModeChange={setUploadMode}
                                 onFileSelected={setSelectedFile} onUrlEntered={setEnteredUrl}
                             />
@@ -367,10 +367,10 @@ export function PRActionButtons({
                         <DialogTitle>Verifikasi Spesifikasi</DialogTitle>
                         <DialogDescription>Lampirkan dokumen verifikasi spesifikasi (opsional).</DialogDescription>
                     </DialogHeader>
-                    
+
                     <div className="flex-1 overflow-y-auto px-6 py-4">
                         <div className="grid gap-4">
-                            <UniversalUploader 
+                            <UniversalUploader
                                 currentMode={uploadMode} onModeChange={setUploadMode}
                                 onFileSelected={setSelectedFile} onUrlEntered={setEnteredUrl}
                             />
@@ -398,7 +398,7 @@ export function PRActionButtons({
                         <DialogTitle>Selesaikan Pengadaan</DialogTitle>
                         <DialogDescription>Konfirmasi bahwa proses pengadaan telah selesai sepenuhnya.</DialogDescription>
                     </DialogHeader>
-                    
+
                     <div className="flex-1 overflow-y-auto px-6 py-4">
                         <div className="grid gap-2">
                             <Label className="font-bold text-xs uppercase tracking-wider opacity-60">Catatan Penyelesaian</Label>
@@ -422,7 +422,7 @@ export function PRActionButtons({
                         <DialogTitle className="text-destructive flex items-center gap-2"><AlertCircle className="h-5 w-5" /> Tolak Pengadaan</DialogTitle>
                         <DialogDescription>Apakah Anda yakin ingin menolak permohonan pengadaan ini? Tindakan ini tidak dapat dibatalkan.</DialogDescription>
                     </DialogHeader>
-                    
+
                     <div className="flex-1 overflow-y-auto px-6 py-4">
                         <div className="grid gap-2">
                             <Label className="font-bold text-xs uppercase tracking-wider opacity-60">Alasan Penolakan</Label>
@@ -447,7 +447,7 @@ export function PRActionButtons({
                         <DialogTitle className="text-yellow-600 flex items-center gap-2"><AlertCircle className="h-5 w-5" /> Minta Revisi</DialogTitle>
                         <DialogDescription>Minta pengaju untuk melakukan revisi pada dokumen atau data pengadaan.</DialogDescription>
                     </DialogHeader>
-                    
+
                     <div className="flex-1 overflow-y-auto px-6 py-4">
                         <div className="grid gap-2">
                             <Label className="font-bold text-xs uppercase tracking-wider opacity-60">Detail Revisi</Label>
@@ -470,7 +470,7 @@ export function PRActionButtons({
                     <DialogHeader className="px-6 py-6 border-b">
                         <DialogTitle className="text-destructive flex items-center gap-2"><Trash2 className="h-5 w-5" /> Hapus Pengajuan</DialogTitle>
                         <DialogDescription className="pt-2">
-                            Apakah Anda yakin ingin menghapus seluruh pengajuan ini? 
+                            Apakah Anda yakin ingin menghapus seluruh pengajuan ini?
                             Semua data dan file terkait akan dihapus secara permanen.
                         </DialogDescription>
                     </DialogHeader>

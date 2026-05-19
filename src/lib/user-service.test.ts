@@ -29,29 +29,27 @@ describe('UserService', () => {
         })
     })
 
-    describe('isUsernameTaken', () => {
-        it('should return true if username exists', async () => {
-            const mockLimit = vi.fn().mockResolvedValue([{ id: '1' }])
-            const mockWhere = vi.fn().mockReturnValue({ limit: mockLimit })
+    describe('isIdentifierTaken', () => {
+        it('should return true if username or email exists', async () => {
+            const mockWhere = vi.fn().mockResolvedValue([{ username: 'taken_user', email: 'taken@example.com' }])
             const mockFrom = vi.fn().mockReturnValue({ where: mockWhere })
 
             // @ts-ignore
             vi.mocked(db.select).mockReturnValue({ from: mockFrom })
 
-            const taken = await UserService.isUsernameTaken('taken_user')
-            expect(taken).toBe(true)
+            const taken = await UserService.isIdentifierTaken('taken_user', 'taken@example.com')
+            expect(taken).toEqual({ username: true, email: true })
         })
 
-        it('should return false if username does not exist', async () => {
-            const mockLimit = vi.fn().mockResolvedValue([])
-            const mockWhere = vi.fn().mockReturnValue({ limit: mockLimit })
+        it('should return false if username and email do not exist', async () => {
+            const mockWhere = vi.fn().mockResolvedValue([])
             const mockFrom = vi.fn().mockReturnValue({ where: mockWhere })
 
             // @ts-ignore
             vi.mocked(db.select).mockReturnValue({ from: mockFrom })
 
-            const taken = await UserService.isUsernameTaken('free_user')
-            expect(taken).toBe(false)
+            const taken = await UserService.isIdentifierTaken('free_user', 'free@example.com')
+            expect(taken).toEqual({ username: false, email: false })
         })
     })
 })

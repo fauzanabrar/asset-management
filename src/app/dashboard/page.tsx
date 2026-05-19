@@ -132,7 +132,7 @@ export default async function Dashboard() {
         <div className="space-y-6 p-6 pt-4 max-w-[1600px] mx-auto">
             <div className="flex justify-between items-center">
                 <div>
-                    <h1 className="text-2xl font-black tracking-tighter uppercase">Pusat Pengelolaan Pengadaan</h1>
+                    <h1 className="text-xl md:text-2xl font-bold tracking-tight text-foreground">Pusat Pengelolaan Pengadaan</h1>
                     <p className="text-xs text-muted-foreground font-medium">Monitoring realisasi dan alokasi anggaran aset <span className="text-primary font-bold">{monthName}</span>.</p>
                 </div>
                 <div className="flex items-center gap-2">
@@ -147,51 +147,49 @@ export default async function Dashboard() {
 
             {/* KPI Section with MoM Comparisons */}
             <div className="grid gap-3 md:grid-cols-2 lg:grid-cols-4">
-                <Card className="shadow-sm overflow-hidden">
+                <Card className="shadow-sm overflow-hidden pt-0 pb-0 gap-2">
                     <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-1.5 pt-4 px-4">
-                        <CardTitle className="text-[10px] font-black uppercase tracking-widest text-muted-foreground">Jumlah Pengajuan</CardTitle>
-                        <FileText className="h-3.5 w-3.5 text-primary" />
+                        <CardTitle className="text-xs font-bold text-muted-foreground">Jumlah Pengajuan</CardTitle>
                     </CardHeader>
                     <CardContent className="px-4 pb-4">
                         <div className="flex items-baseline gap-4">
                             <div className="flex flex-col">
-                                <span className="text-3xl font-black leading-none">{thisMonthCount}</span>
-                                <span className="text-[7px] font-black uppercase text-muted-foreground mt-1">Total</span>
+                                <span className="text-2xl font-bold leading-none text-foreground">{thisMonthCount}</span>
+                                <span className="text-[10px] font-semibold text-muted-foreground mt-1">Total</span>
                             </div>
                             
                             <div className="flex items-center gap-3 h-full">
                                 <span className="text-muted-foreground/20 font-light text-xl self-start -mt-0.5">|</span>
                                 
                                 <div className="flex flex-col">
-                                    <span className="text-lg font-black text-emerald-500 leading-none">{thisMonthDone}</span>
-                                    <span className="text-[7px] font-black uppercase text-emerald-500/70 mt-1">Selesai</span>
+                                    <span className="text-lg font-bold text-emerald-600 leading-none">{thisMonthDone}</span>
+                                    <span className="text-[10px] font-semibold text-emerald-600/70 mt-1">Selesai</span>
                                 </div>
                                 
                                 <span className="text-muted-foreground/20 font-light text-xl self-start -mt-0.5">|</span>
                                 
                                 <div className="flex flex-col">
-                                    <span className="text-lg font-black text-orange-500 leading-none">{thisMonthPending}</span>
-                                    <span className="text-[7px] font-black uppercase text-orange-500/70 mt-1">Pending</span>
+                                    <span className="text-lg font-bold text-orange-600 leading-none">{thisMonthPending}</span>
+                                    <span className="text-[10px] font-semibold text-orange-600/70 mt-1">Pending</span>
                                 </div>
                                 
                                 <span className="text-muted-foreground/20 font-light text-xl self-start -mt-0.5">|</span>
                                 
                                 <div className="flex flex-col">
-                                    <span className="text-lg font-black text-rose-500 leading-none">{thisMonthRejected}</span>
-                                    <span className="text-[7px] font-black uppercase text-rose-500/70 mt-1">Ditolak</span>
+                                    <span className="text-lg font-bold text-rose-600 leading-none">{thisMonthRejected}</span>
+                                    <span className="text-[10px] font-semibold text-rose-600/70 mt-1">Ditolak</span>
                                 </div>
                             </div>
                         </div>
                     </CardContent>
                 </Card>
 
-                <Card className="shadow-sm overflow-hidden">
+                <Card className="shadow-sm overflow-hidden pt-0 pb-0 gap-2">
                     <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-1.5 pt-4 px-4">
-                        <CardTitle className="text-[10px] font-black uppercase tracking-widest text-muted-foreground">Realisasi Anggaran</CardTitle>
-                        <Wallet className="h-3.5 w-3.5 text-blue-500" />
+                        <CardTitle className="text-xs font-bold text-muted-foreground">Realisasi Anggaran</CardTitle>
                     </CardHeader>
                     <CardContent className="px-4 pb-4">
-                        <div className="text-xl font-black leading-none">{formatCurrency(thisMonthTotal)}</div>
+                        <div className="text-xl font-bold leading-none">{formatCurrency(thisMonthTotal)}</div>
                         <div className="flex items-center gap-1 mt-1.5">
                             {totalDiff >= 0 ? <TrendingUp className="h-2.5 w-2.5 text-emerald-500" /> : <TrendingDown className="h-2.5 w-2.5 text-rose-500" />}
                             <span className={`text-[9px] font-bold ${totalDiff >= 0 ? 'text-emerald-500' : 'text-rose-500'}`}>
@@ -201,23 +199,21 @@ export default async function Dashboard() {
                     </CardContent>
                 </Card>
 
-                <Card className="shadow-sm overflow-hidden">
+                <Card className="shadow-sm overflow-hidden pt-0 pb-0 gap-2">
                     <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-1.5 pt-4 px-4">
-                        <CardTitle className="text-[10px] font-black uppercase tracking-widest text-muted-foreground">Anggaran Dalam Proses</CardTitle>
-                        <Clock className="h-3.5 w-3.5 text-orange-500" />
+                        <CardTitle className="text-xs font-bold text-muted-foreground">Anggaran Dalam Proses</CardTitle>
                     </CardHeader>
                     <CardContent className="px-4 pb-4">
-                        <div className="text-xl font-black leading-none text-orange-500">{formatCurrency(Number(spendingStats.pending))}</div>
+                        <div className="text-xl font-bold leading-none text-orange-600">{formatCurrency(Number(spendingStats.pending))}</div>
                     </CardContent>
                 </Card>
 
-                <Card className="shadow-sm overflow-hidden">
+                <Card className="shadow-sm overflow-hidden pt-0 pb-0 gap-2">
                     <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-1.5 pt-4 px-4">
-                        <CardTitle className="text-[10px] font-black uppercase tracking-widest text-muted-foreground">Anggaran Direalisasi</CardTitle>
-                        <CheckCircle2 className="h-3.5 w-3.5 text-emerald-500" />
+                        <CardTitle className="text-xs font-bold text-muted-foreground">Anggaran Direalisasi</CardTitle>
                     </CardHeader>
                     <CardContent className="px-4 pb-4">
-                        <div className="text-xl font-black leading-none text-emerald-500">{formatCurrency(thisMonthDoneBudget)}</div>
+                        <div className="text-xl font-bold leading-none text-emerald-600">{formatCurrency(thisMonthDoneBudget)}</div>
                         <div className="flex items-center gap-1 mt-1.5">
                             {budgetDoneDiff >= 0 ? <TrendingUp className="h-2.5 w-2.5 text-emerald-500" /> : <TrendingDown className="h-2.5 w-2.5 text-rose-500" />}
                             <span className={`text-[9px] font-bold ${budgetDoneDiff >= 0 ? 'text-emerald-500' : 'text-rose-500'}`}>
@@ -230,10 +226,10 @@ export default async function Dashboard() {
 
             <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
                 {/* 1. Category Pie Chart */}
-                <Card className="shadow-sm lg:col-span-1">
-                    <CardHeader className="border-b bg-muted/5 py-3 px-4">
-                        <CardTitle className="text-xs font-black uppercase tracking-widest">Komposisi Pengadaan</CardTitle>
-                        <CardDescription className="text-[9px] font-bold uppercase tracking-tight">Distribusi alokasi anggaran per kategori.</CardDescription>
+                <Card className="shadow-sm lg:col-span-1 pt-0 pb-0 gap-0">
+                    <CardHeader className="border-b bg-muted/5 py-3.5 px-4 rounded-t-xl">
+                        <CardTitle className="text-sm font-bold text-foreground">Komposisi Pengadaan</CardTitle>
+                        <CardDescription className="text-xs text-muted-foreground">Distribusi alokasi anggaran per kategori.</CardDescription>
                     </CardHeader>
                     <CardContent className="p-4 flex items-center justify-center min-h-[220px]">
                         <CategoryPieChart data={pieData} />
@@ -241,10 +237,10 @@ export default async function Dashboard() {
                 </Card>
 
                 {/* 2. Top Spends (Clickable Table) */}
-                <Card className="shadow-sm lg:col-span-1">
-                    <CardHeader className="border-b bg-muted/5 py-3 px-4">
-                        <CardTitle className="text-xs font-black uppercase tracking-widest">Pengadaan Tertinggi</CardTitle>
-                        <CardDescription className="text-[9px] font-bold uppercase tracking-tight">Daftar pengajuan dengan nilai anggaran tertinggi.</CardDescription>
+                <Card className="shadow-sm lg:col-span-1 pt-0 pb-0 gap-0">
+                    <CardHeader className="border-b bg-muted/5 py-3.5 px-4 rounded-t-xl">
+                        <CardTitle className="text-sm font-bold text-foreground">Pengadaan Tertinggi</CardTitle>
+                        <CardDescription className="text-xs text-muted-foreground">Daftar pengajuan dengan nilai anggaran tertinggi.</CardDescription>
                     </CardHeader>
                     <CardContent className="p-0">
                         <div className="divide-y">
@@ -258,11 +254,11 @@ export default async function Dashboard() {
                                         <ArrowUpRight className="h-3.5 w-3.5 text-muted-foreground group-hover:text-primary transition-colors" />
                                     </div>
                                     <div className="flex-1 min-w-0">
-                                        <p className="text-[11px] font-black truncate uppercase tracking-tight">{spend.title}</p>
-                                        <p className="text-[9px] font-bold text-muted-foreground uppercase">{spend.status.replace(/_/g, ' ')}</p>
+                                        <p className="text-[13px] font-semibold truncate text-foreground group-hover:text-primary transition-colors">{spend.title}</p>
+                                        <p className="text-[10px] font-medium text-muted-foreground uppercase">{spend.status.replace(/_/g, ' ')}</p>
                                     </div>
                                     <div className="text-right">
-                                        <p className="text-[11px] font-black text-foreground">{formatCurrency(Number(spend.total))}</p>
+                                        <p className="text-[13px] font-bold text-foreground">{formatCurrency(Number(spend.total))}</p>
                                     </div>
                                 </Link>
                             ))}
@@ -271,33 +267,32 @@ export default async function Dashboard() {
                 </Card>
 
                 {/* 3. Refined Activity (One line with Badges) */}
-                <Card className="shadow-sm lg:col-span-1">
-                    <CardHeader className="border-b bg-muted/5 py-3 px-4">
-                        <CardTitle className="text-xs font-black uppercase tracking-widest flex items-center gap-2">
-                            <Activity className="h-3.5 w-3.5 text-primary" />
+                <Card className="shadow-sm lg:col-span-1 pt-0 pb-0 gap-0">
+                    <CardHeader className="border-b bg-muted/5 py-3.5 px-4 rounded-t-xl">
+                        <CardTitle className="text-sm font-bold text-foreground">
                             Aktivitas Terkini
                         </CardTitle>
-                        <CardDescription className="text-[9px] font-bold uppercase tracking-tight">Riwayat aktivitas pengadaan terbaru di sistem.</CardDescription>
+                        <CardDescription className="text-xs text-muted-foreground">Riwayat aktivitas pengadaan terbaru di sistem.</CardDescription>
                     </CardHeader>
                     <CardContent className="p-0">
                         <div className="divide-y">
                             {recentLogs.map(({ log, actor, pr }) => (
                                 <div key={log.id} className="p-3 flex items-center justify-between gap-3">
                                     <div className="flex items-center gap-2 min-w-0">
-                                        <Avatar className="h-5 w-5 border shrink-0">
-                                            <AvatarFallback className="text-[7px] font-black bg-primary/5 text-primary">{(actor?.name || 'U').charAt(0)}</AvatarFallback>
+                                        <Avatar className="h-6 w-6 border shrink-0">
+                                            <AvatarFallback className="text-[10px] font-bold bg-primary/5 text-primary">{(actor?.name || 'U').charAt(0)}</AvatarFallback>
                                         </Avatar>
                                         <div className="flex items-center gap-1.5 min-w-0 flex-wrap">
-                                            <span className="font-black uppercase text-[9px] shrink-0">{actor?.name || 'System'}</span> 
-                                            <Badge variant="secondary" className="text-[8px] font-black uppercase py-0 px-1.5 h-3.5 border-none bg-primary/5 text-primary/70">
+                                            <span className="font-bold text-xs text-foreground shrink-0">{actor?.name || 'System'}</span> 
+                                            <Badge variant="secondary" className="text-[9px] font-semibold uppercase py-0 px-1.5 h-4.5 border-none bg-primary/5 text-primary/70">
                                                 {log.action.toLowerCase().replace(/_/g, ' ')}
                                             </Badge>
-                                            <Link href={`/dashboard/pr/${pr?.id}`} className="font-bold text-foreground/80 hover:text-primary hover:underline text-[9px] truncate max-w-[100px]">
+                                            <Link href={`/dashboard/pr/${pr?.id}`} className="font-medium text-muted-foreground hover:text-primary hover:underline text-xs truncate max-w-[120px]">
                                                 {pr?.title || 'Pengadaan'}
                                             </Link>
                                         </div>
                                     </div>
-                                    <span className="text-[8px] font-black text-muted-foreground whitespace-nowrap bg-muted px-1 py-0.5 rounded uppercase tracking-tighter shrink-0">
+                                    <span className="text-[10px] font-medium text-muted-foreground whitespace-nowrap bg-muted px-1.5 py-0.5 rounded uppercase tracking-tight shrink-0">
                                         {new Date(log.createdAt).toLocaleDateString('id-ID', { day: '2-digit', month: '2-digit' })} {new Date(log.createdAt).toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit' })}
                                     </span>
                                 </div>

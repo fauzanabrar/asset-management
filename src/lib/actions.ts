@@ -24,11 +24,11 @@ export async function register(formData: FormData) {
         const taken = await UserService.isIdentifierTaken(username, email || undefined);
 
         if (taken.username) {
-            return { error: "This username is already taken. Please choose another one." };
+            return { error: "Username ini sudah digunakan. Silakan pilih yang lain." };
         }
 
         if (taken.email) {
-            return { error: "This email is already associated with an account." };
+            return { error: "Email ini sudah terasosiasi dengan akun lain." };
         }
 
         await UserService.createUser(validatedFields.data);
@@ -36,7 +36,7 @@ export async function register(formData: FormData) {
         return { success: true };
     } catch (error) {
         console.error("[REGISTER_ERROR]:", error);
-        return { error: "Registration failed. Please try again later." };
+        return { error: "Pendaftaran gagal. Silakan coba lagi nanti." };
     }
 }
 
@@ -48,22 +48,22 @@ export async function authenticate(formData: FormData) {
     const validatedFields = loginSchema.safeParse(rawData);
 
     if (!validatedFields.success) {
-        return { error: "Invalid login credentials provided." };
+        return { error: "Kredensial login yang diberikan tidak valid." };
     }
 
     try {
         // We set redirect: false to handle it manually and avoid NEXT_REDIRECT errors in try-catch
         const result = await signIn("credentials", { ...rawData, redirect: false });
         if (result?.error) {
-            return { error: "Invalid username/email or password." };
+            return { error: "Username/email atau kata sandi salah." };
         }
     } catch (error) {
         if (error instanceof AuthError) {
             switch (error.type) {
                 case "CredentialsSignin":
-                    return { error: "Invalid username/email or password." };
+                    return { error: "Username/email atau kata sandi salah." };
                 default:
-                    return { error: "An unexpected error occurred during sign in." };
+                    return { error: "Terjadi kesalahan yang tidak terduga saat masuk." };
             }
         }
         // If it's a redirect error from Auth.js, we let it propagate if we didn't use redirect: false

@@ -83,9 +83,6 @@ export function AjukanPermohonanDialog() {
             <DialogContent className="sm:max-w-[600px] p-0 flex flex-col max-h-[90vh]">
                 <DialogHeader className="px-6 py-4 border-b">
                     <DialogTitle>Ajukan Permohonan Pengadaan</DialogTitle>
-                    <DialogDescription>
-                        Lengkapi form di bawah ini untuk mengajukan permohonan pengadaan barang/jasa baru.
-                    </DialogDescription>
                 </DialogHeader>
 
                 <Form {...form}>

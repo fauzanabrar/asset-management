@@ -5,7 +5,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
-import { ReceiptText, Trash2, Plus } from 'lucide-react';
+import { Trash2, Plus } from 'lucide-react';
 import {
     Select,
     SelectContent,
@@ -60,7 +60,7 @@ export function RABItemEditor({ items, onChange }: RABItemEditorProps) {
     return (
         <div className="space-y-4">
             <Label className="flex items-center justify-between">
-                <div className="flex items-center gap-2 font-bold"><ReceiptText className="h-4 w-4" /> Item Rincian RAB</div>
+                <div className="flex items-center gap-2 font-bold">Item Rincian RAB</div>
                 <Button type="button" variant="ghost" size="sm" className="h-6 px-2 text-[10px] font-bold" onClick={() => setShowBulkAdd(!showBulkAdd)}>
                     {showBulkAdd ? 'Tutup Bulk Add' : 'Tambah Banyak (Bulk)'}
                 </Button>

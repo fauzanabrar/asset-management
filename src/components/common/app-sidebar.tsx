@@ -36,14 +36,14 @@ export function AppSidebar({ user }: AppSidebarProps) {
         <Sidebar className="border-r-0 bg-white/60 dark:bg-zinc-950/60 backdrop-blur-2xl shadow-xl transition-all duration-300">
             <SidebarHeader className="h-16 flex items-center justify-center border-b border-black/5 dark:border-white/5 px-6">
                 <div className="flex items-center gap-3 w-full">
-                    <div className="flex items-center justify-center h-9 w-9 rounded-xl bg-gradient-to-br from-primary to-green-500 shadow-lg shadow-primary/20 shrink-0">
+                    <div className="flex items-center justify-center h-9 w-9 rounded-xl bg-green-600 shadow-lg shadow-green-600/20 shrink-0">
                         <Box className="h-5 w-5 text-white stroke-[2.5]" />
                     </div>
                     <div className="flex flex-col leading-none justify-center">
                         <span className="text-[9px] font-bold tracking-[0.2em] text-muted-foreground uppercase mb-1">
                             Manajemen Asset
                         </span>
-                        <span className="text-base font-black bg-gradient-to-br from-primary to-green-500 bg-clip-text text-transparent">
+                        <span className="text-base font-black text-green-600">
                             KALLA TOYOTA
                         </span>
                     </div>

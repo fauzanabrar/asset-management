@@ -16,8 +16,8 @@ export function OTPForm() {
     return (
         <div className="space-y-4">
             <div className="space-y-2 text-center">
-                <h3 className="text-lg font-medium">Two-Factor Authentication</h3>
-                <p className="text-sm text-muted-foreground">Please enter the one-time password sent to your phone.</p>
+                <h3 className="text-lg font-medium">Autentikasi Dua Faktor</h3>
+                <p className="text-sm text-muted-foreground">Silakan masukkan kode OTP yang dikirimkan ke ponsel Anda.</p>
             </div>
             <div className="flex justify-center">
                 <InputOTP
@@ -38,7 +38,7 @@ export function OTPForm() {
                     </InputOTPGroup>
                 </InputOTP>
             </div>
-            <Button className="w-full" disabled={value.length < 6}>Verify</Button>
+            <Button className="w-full" disabled={value.length < 6}>Verifikasi</Button>
         </div>
     )
 }

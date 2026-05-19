@@ -27,16 +27,16 @@ export default function LoginPage() {
 
     return (
         <AuthCard
-            title="Welcome back"
-            description="Enter your email or username to sign in"
-            footerText="Don't have an account?"
-            footerLinkText="Sign up"
+            title="Login"
+            description="Masukkan email atau username Anda untuk masuk"
+            footerText="Belum punya akun?"
+            footerLinkText="Daftar"
             footerLinkHref="/register"
         >
             <form action={handleSubmit}>
                 <div className="grid gap-4">
                     <div className="grid gap-2">
-                        <Label htmlFor="email">Email or Username</Label>
+                        <Label htmlFor="email">Email atau Username</Label>
                         <Input
                             id="email"
                             name="email"
@@ -50,7 +50,7 @@ export default function LoginPage() {
                         />
                     </div>
                     <div className="grid gap-2">
-                        <Label htmlFor="password">Password</Label>
+                        <Label htmlFor="password">Kata Sandi</Label>
                         <Input
                             id="password"
                             name="password"
@@ -66,10 +66,10 @@ export default function LoginPage() {
                         {isPending ? (
                             <>
                                 <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                                Signing In...
+                                Sedang Masuk...
                             </>
                         ) : (
-                            "Sign In"
+                            "Masuk"
                         )}
                     </Button>
                 </div>

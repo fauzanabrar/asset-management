@@ -29,27 +29,27 @@ export default function RegisterPage() {
                 return
             }
 
-            toast.success("Account created successfully!")
+            toast.success("Akun berhasil dibuat!")
             router.push("/login")
         })
     }
 
     return (
         <AuthCard
-            title="Create an account"
-            description="Enter your details below to create your account"
-            footerText="Already have an account?"
-            footerLinkText="Sign in"
+            title="Daftar Akun Baru"
+            description="Masukkan detail Anda di bawah ini untuk membuat akun"
+            footerText="Sudah punya akun?"
+            footerLinkText="Masuk"
             footerLinkHref="/login"
         >
             <form action={handleSubmit}>
                 <div className="grid gap-4">
                     <div className="grid gap-2">
-                        <Label htmlFor="name">Full Name</Label>
+                        <Label htmlFor="name">Nama Lengkap</Label>
                         <Input
                             id="name"
                             name="name"
-                            placeholder="John Doe"
+                            placeholder="Nama Lengkap Anda"
                             required
                             disabled={isPending}
                         />
@@ -71,7 +71,7 @@ export default function RegisterPage() {
                         )}
                     </div>
                     <div className="grid gap-2">
-                        <Label htmlFor="email">Email (Optional)</Label>
+                        <Label htmlFor="email">Email (Opsional)</Label>
                         <Input
                             id="email"
                             name="email"
@@ -84,7 +84,7 @@ export default function RegisterPage() {
                         )}
                     </div>
                     <div className="grid gap-2">
-                        <Label htmlFor="location">Nama Cabang / Lokasi (Optional)</Label>
+                        <Label htmlFor="location">Nama Cabang / Lokasi (Opsional)</Label>
                         <Input
                             id="location"
                             name="location"
@@ -96,7 +96,7 @@ export default function RegisterPage() {
                         )}
                     </div>
                     <div className="grid gap-2">
-                        <Label htmlFor="password">Password</Label>
+                        <Label htmlFor="password">Kata Sandi</Label>
                         <Input
                             id="password"
                             name="password"
@@ -109,7 +109,7 @@ export default function RegisterPage() {
                         )}
                     </div>
                     <Button className="w-full" type="submit" disabled={isPending}>
-                        {isPending ? "Creating account..." : "Create account"}
+                        {isPending ? "Sedang membuat akun..." : "Daftar"}
                     </Button>
                 </div>
             </form>
