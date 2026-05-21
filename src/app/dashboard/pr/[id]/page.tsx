@@ -383,7 +383,7 @@ export default async function PRDetailPage({ params }: { params: Promise<{ id: s
                 </div>
                 <div className="space-y-6">
                     <Card className="overflow-hidden border-none shadow-xl bg-gradient-to-b from-card to-muted/20">
-                        <div className="h-1.5 w-full bg-gradient-to-r from-primary/50 via-primary to-primary/50" />
+
                         <CardHeader><CardTitle className="text-lg font-bold">Informasi Pengajuan</CardTitle></CardHeader>
                         <CardContent className="space-y-4 pt-4">
                             {[

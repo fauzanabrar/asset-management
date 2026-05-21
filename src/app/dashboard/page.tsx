@@ -2,7 +2,7 @@ import { db } from "@/db";
 import { purchaseRequests, approvalLogs, users, prItems } from "@/db/schema";
 import { desc, eq, sql, gte, and, lt } from "drizzle-orm";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Activity, Clock, CheckCircle2, FileText, Wallet, History, MapPin, Building2, Layers, TrendingUp, TrendingDown, ArrowUpRight, XCircle } from "lucide-react";
+import { Activity, Clock, CheckCircle2, FileText, Wallet, History, MapPin, Building2, Layers, TrendingUp, TrendingDown, ArrowUp, ArrowDown, ArrowUpRight, XCircle } from "lucide-react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { auth } from "@/auth";
@@ -191,7 +191,7 @@ export default async function Dashboard() {
                     <CardContent className="px-4 pb-4">
                         <div className="text-xl font-bold leading-none">{formatCurrency(thisMonthTotal)}</div>
                         <div className="flex items-center gap-1 mt-1.5">
-                            {totalDiff >= 0 ? <TrendingUp className="h-2.5 w-2.5 text-emerald-500" /> : <TrendingDown className="h-2.5 w-2.5 text-rose-500" />}
+                            {totalDiff >= 0 ? <ArrowUp className="h-2.5 w-2.5 text-emerald-500" /> : <ArrowDown className="h-2.5 w-2.5 text-rose-500" />}
                             <span className={`text-[9px] font-bold ${totalDiff >= 0 ? 'text-emerald-500' : 'text-rose-500'}`}>
                                 {Math.abs(totalPct).toFixed(1)}% vs bln lalu
                             </span>
@@ -215,7 +215,7 @@ export default async function Dashboard() {
                     <CardContent className="px-4 pb-4">
                         <div className="text-xl font-bold leading-none text-emerald-600">{formatCurrency(thisMonthDoneBudget)}</div>
                         <div className="flex items-center gap-1 mt-1.5">
-                            {budgetDoneDiff >= 0 ? <TrendingUp className="h-2.5 w-2.5 text-emerald-500" /> : <TrendingDown className="h-2.5 w-2.5 text-rose-500" />}
+                            {budgetDoneDiff >= 0 ? <ArrowUp className="h-2.5 w-2.5 text-emerald-500" /> : <ArrowDown className="h-2.5 w-2.5 text-rose-500" />}
                             <span className={`text-[9px] font-bold ${budgetDoneDiff >= 0 ? 'text-emerald-500' : 'text-rose-500'}`}>
                                 {Math.abs(budgetDonePct).toFixed(1)}% vs bln lalu
                             </span>
